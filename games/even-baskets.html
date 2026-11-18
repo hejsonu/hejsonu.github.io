@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Even Baskets — A Daily Split-the-Shopping Number Puzzle</title>
+<meta name="description" content="A free daily number puzzle: split eight grocery items into two baskets that cost exactly the same, without putting the fragile item next to the heavy one. No sign-up, works on phones.">
+<link rel="stylesheet" href="games.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="../index.html">Everyday Figures</a><nav><a href="index.html">Puzzles</a><a href="../index.html">Tools</a><a href="../about.html">About</a></nav></div></header>
+<main class="wrap">
+<h1>Even Baskets</h1>
+<p class="lead">Two people are carrying the shopping home and want to pay half each. Split today's eight items into basket A and basket B so both baskets cost exactly the same — and keep the fragile item out of the basket with the heavy one.</p>
+
+<section class="game" aria-label="Puzzle">
+  <div class="top"><span id="label">Today's shopping</span></div>
+  <p class="rule" id="rule"></p>
+  <div class="totals"><span>Basket A: <strong id="sumA">$0</strong></span><span>Basket B: <strong id="sumB">$0</strong></span></div>
+  <div id="items" role="group" aria-label="Shopping items"></div>
+  <p id="msg" class="msg" aria-live="polite"></p>
+  <div class="actions">
+    <button type="button" id="reset" class="main">Start over</button>
+    <button type="button" id="reveal">Show an answer</button>
+    <button type="button" id="practice">Practice shopping</button>
+    <button type="button" id="daily">Back to today</button>
+  </div>
+  <noscript><p>This puzzle needs JavaScript turned on.</p></noscript>
+</section>
+
+<h2>How to play</h2>
+<ol>
+  <li>Each item has a price. Tap <strong>A</strong> or <strong>B</strong> next to it to put it in that basket. Tap the same letter again to take it back out.</li>
+  <li>The running totals of both baskets are shown above the list.</li>
+  <li>When every item is packed, the two totals must be equal.</li>
+  <li>The item marked <em>fragile</em> and the item marked <em>heavy</em> must end up in different baskets.</li>
+</ol>
+
+<h2>Tips</h2>
+<ul>
+  <li><strong>Find the half first.</strong> Add up all eight prices and halve it. That is the amount each basket needs. If the items cost $58 in total, each basket must come to $29.</li>
+  <li><strong>Place the rule items first.</strong> The fragile and heavy items always go to different sides, so put one in A and one in B before anything else. Now you only need to fill the gaps.</li>
+  <li><strong>Mind odd and even.</strong> If one basket is short by an odd amount, you need to move an odd number of odd-priced items. This rules out many swaps quickly.</li>
+  <li><strong>Swap, don't restart.</strong> If basket A is $4 too high, look for an item in A and an item in B whose prices differ by $2 and swap them — that changes each side by $2.</li>
+</ul>
+
+<h2>Frequently asked questions</h2>
+<h3>Is there always an answer?</h3>
+<p>Yes. A program checks all 128 different ways to split the eight items (swapping the two baskets is not counted as a new way) and only uses shopping lists with one to three answers. It also makes sure the fragile rule matters: on every board, at least one split with equal totals is ruled out because it would crush the fragile item.</p>
+<h3>Why do basket A and basket B count as the same answer when swapped?</h3>
+<p>Because the baskets are identical — moving everything from A to B and back gives the same split. When you win, the count of answers shown ignores these mirror images.</p>
+<h3>When does a new puzzle appear?</h3>
+<p>The daily list is based on the date on your own device, so it changes at midnight your time. Everyone on the same date gets the same items.</p>
+<h3>Can I play more than one a day?</h3>
+<p>Yes. <strong>Practice shopping</strong> makes a fresh random list as many times as you like. <strong>Back to today</strong> returns to the daily one.</p>
+<h3>Do you save my results or track me?</h3>
+<p>No. The puzzle runs entirely in your browser. It does not use cookies, does not store anything on your device, and sends nothing to us.</p>
+<h3>Are the prices real?</h3>
+<p>No. Prices are whole dollars from $1 to $12 picked by the program to make a good puzzle, not prices from any shop.</p>
+</main>
+<footer class="wrap">Everyday Figures · Puzzles are made by a small program from the date; the rules and checks are described above.</footer>
+<script src="even-baskets.js"></script>
+</body>
+</html>

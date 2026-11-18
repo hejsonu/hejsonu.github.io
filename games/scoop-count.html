@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Scoop Count — A Daily Measuring-Cup Fraction Puzzle</title>
+<meta name="description" content="A free daily fraction puzzle: measure exactly the amount a recipe needs with today's measuring cups, in as few scoops as possible. No sign-up, works on phones.">
+<link rel="stylesheet" href="games.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="../index.html">Everyday Figures</a><nav><a href="index.html">Puzzles</a><a href="../index.html">Tools</a><a href="../about.html">About</a></nav></div></header>
+<main class="wrap">
+<h1>Scoop Count</h1>
+<p class="lead">The recipe needs an awkward amount and only some of your measuring cups are clean. Use the cups you have to measure exactly the right amount — in as few scoops as you can.</p>
+
+<section class="game" aria-label="Puzzle">
+  <div class="top"><span id="label">Today's recipe</span><span class="target">Need: <strong id="target">…</strong></span></div>
+  <p class="totals"><span>In the bowl: <strong id="have">0</strong></span><span>Fewest scoops: <strong id="par">…</strong></span></p>
+  <div id="cups" role="group" aria-label="Clean measuring cups"></div>
+  <p id="scoops" aria-live="polite"></p>
+  <p id="msg" class="msg" aria-live="polite"></p>
+  <div class="actions">
+    <button type="button" id="undo" class="main">Undo</button>
+    <button type="button" id="reset">Start over</button>
+    <button type="button" id="reveal">Show a shortest way</button>
+    <button type="button" id="practice">Practice recipe</button>
+    <button type="button" id="daily">Back to today</button>
+  </div>
+  <noscript><p>This puzzle needs JavaScript turned on.</p></noscript>
+</section>
+
+<h2>How to play</h2>
+<ol>
+  <li>The amount the recipe needs is shown at the top, for example <em>2 5/12 cups</em>.</li>
+  <li>Tap a cup to add one full scoop of it to the bowl. You can use the same cup as many times as you like.</li>
+  <li>Reach the exact amount to finish. Going over does not count — tap <strong>Undo</strong> to take the last scoop back.</li>
+  <li>Any exact answer is a win, but try to match the <em>fewest scoops</em> number. On a keyboard, press 1–4 for the cups and Backspace to undo.</li>
+</ol>
+
+<h2>Tips</h2>
+<ul>
+  <li><strong>Think in twelfths.</strong> Every cup here is a whole number of twelfths: 1 cup = 12, 3/4 = 9, 2/3 = 8, 1/2 = 6, 1/3 = 4 and 1/4 = 3. So 2 5/12 cups is 29 twelfths, and the puzzle becomes adding small whole numbers.</li>
+  <li><strong>Biggest first is not always best.</strong> To make 1 1/3 cups (16 twelfths) with 3/4, 2/3 and 1/4 cups, starting with 3/4 leaves 7 twelfths, and no mix of 1/4 cups can finish that. Two 2/3 scoops do it straight away.</li>
+  <li><strong>Fix the leftover.</strong> Look at the part after the whole cups. Thirds (4/12, 8/12) can only come from 1/3 and 2/3 cups, or from mixing 1/4 and 3/4 cups with others. Work out which cups can make that leftover, then fill the rest with the biggest cup.</li>
+</ul>
+
+<h2>Frequently asked questions</h2>
+<h3>Is there always an answer?</h3>
+<p>Yes. A program works out the fewest scoops for every board before it is shown, and only uses boards that can be measured exactly in 3 to 7 scoops. Many days are chosen so that simply grabbing the biggest cup first does not give the shortest answer.</p>
+<h3>Why these cup sizes?</h3>
+<p>They are the sizes found in most US measuring-cup sets: 1, 3/4, 2/3, 1/2, 1/3 and 1/4 cup. Each day three or four of them are available.</p>
+<h3>When does a new puzzle appear?</h3>
+<p>The daily recipe is based on the date on your own device, so it changes at midnight your time. Everyone on the same date gets the same recipe.</p>
+<h3>Do you save my results or track me?</h3>
+<p>No. The puzzle runs entirely in your browser. It does not use cookies, does not store anything on your device, and sends nothing to us.</p>
+<h3>Is this useful for real cooking?</h3>
+<p>It is good practice for adding fractions, which comes up when you scale a recipe up or down. For baking where accuracy really matters, a kitchen scale is still the most reliable tool.</p>
+</main>
+<footer class="wrap">Everyday Figures · Puzzles are made by a small program from the date; the rules and checks are described above.</footer>
+<script src="scoop-count.js"></script>
+</body>
+</html>
