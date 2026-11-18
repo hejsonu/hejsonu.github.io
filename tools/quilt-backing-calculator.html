@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quilt Backing Calculator — Yardage With Seams, Overhang and Wide-Back Fabric</title>
+<meta name="description" content="How much backing fabric does your quilt need? Compares vertical and horizontal seams, includes the extra for long-arm quilting, and rounds to the eighth of a yard you can actually buy.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="../index.html">Everyday Figures</a><nav><a href="../index.html">All tools</a><a href="../about.html">About</a></nav></div></header>
+<main class="wrap">
+<h1>Quilt Backing Calculator</h1>
+<p class="lead">Dividing the backing area by the area of a yard of fabric gives the wrong answer: fabric comes in fixed-width pieces that have to be sewn together, and the leftover strip beside the last panel is wasted. This tool works in whole panels, tries the seams both ways, and tells you the yardage to ask for at the cutting counter.</p>
+
+<section class="tool" aria-label="Calculator">
+  <div class="grid g2">
+    <div><label for="w">Quilt width (in)</label><input id="w" type="number" min="0" step="0.5" inputmode="decimal" value="60"></div>
+    <div><label for="l">Quilt length (in)</label><input id="l" type="number" min="0" step="0.5" inputmode="decimal" value="72"></div>
+    <div><label for="over">Extra on each side (in)</label><input id="over" type="number" min="0" step="0.5" inputmode="decimal" value="4"></div>
+    <div><label for="fw">Usable fabric width (in)</label><select id="fw"><option value="40">40 — standard 42–44" quilting cotton</option><option value="42">42 — generous 44/45" cotton</option><option value="58">58 — 60" fabric</option><option value="106">106 — 108" wide backing</option></select></div>
+  </div>
+  <div class="actions"><button type="button" id="calc">Calculate</button></div>
+  <div class="result" id="out" aria-live="polite"></div>
+</section>
+
+<h2>How to use it</h2>
+<ol>
+  <li>Enter the finished quilt top size.</li>
+  <li>Set the extra backing on each side. Long-arm quilters commonly ask for about 4 inches per side (some want more — ask yours); for quilting at home on a domestic machine, 2–3 inches is usually enough.</li>
+  <li>Choose the usable width of your fabric — the width after the selvages are trimmed off. Quilting cotton sold as 42–44" usually gives about 40" you can use.</li>
+  <li>The tool adds ½ inch per seam (¼-inch seam allowance on each piece) and compares seams running along the length with seams running across.</li>
+</ol>
+
+<h2>Worked examples</h2>
+<h3>1. A 60 x 72-inch throw, 4 inches extra each side</h3>
+<p>The backing must be 68 x 80 inches. Two 40-inch panels sewn together give 79.5 inches — enough to cover the 68-inch width — so you need two pieces 80 inches long: 160 inches = 4.44 yards, which you buy as <strong>4 1/2 yards</strong>. Seams across the other way would need three panels and 5 3/4 yards. The area shortcut (68 × 80 ÷ 1,440) says 3.78 yards — <strong>you would come home short</strong>.</p>
+
+<h3>2. A 90 x 108-inch queen quilt</h3>
+<table><tr><th>Backing 98 x 116 in</th><th class="num">Panels</th><th class="num">Yardage</th></tr>
+<tr><td>40" cotton, seams along the length</td><td class="num">3 × 116 in</td><td class="num">9 3/4 yd</td></tr>
+<tr><td>40" cotton, seams across</td><td class="num">3 × 98 in</td><td class="num">8 1/4 yd</td></tr>
+<tr><td>108" wide backing</td><td class="num">1 × 116 in</td><td class="num">3 1/4 yd</td></tr></table>
+<p>Turning the seams sideways saves 1 1/2 yards of standard cotton. A single piece of wide backing avoids seams altogether.</p>
+
+<h3>3. A 36 x 52-inch baby quilt: 4 inches or 2 inches of extra?</h3>
+<p>With 4 inches each side the backing is 44 inches wide — just too wide for one 40-inch panel, so you need two panels and <strong>2 1/2 yards</strong> (seams across). With 2 inches each side it is exactly 40 inches wide and one 56-inch piece does it: <strong>1 5/8 yards</strong>. If you quilt it yourself, the smaller margin saves almost a yard.</p>
+
+<h2>Frequently asked questions</h2>
+<details><summary>Why add extra backing around the quilt?</summary>
+<p>The layers shift slightly as they are quilted, and a long-arm frame needs fabric to clamp onto. Extra on every side means the backing still covers the top when the quilting is done. Ask your long-arm quilter how much they need.</p></details>
+<details><summary>Should the backing seams run vertically or horizontally?</summary>
+<p>Either works on the finished quilt. Choose whichever uses less fabric — the tool shows both. Press the seams open to reduce bulk, and trim the selvages off before sewing.</p></details>
+<details><summary>Why does the tool round up to an eighth of a yard?</summary>
+<p>That is how quilt shops usually cut fabric. If the fabric might shrink when prewashed, consider buying a little more than the result.</p></details>
+</main>
+<footer class="site"><div class="wrap"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../contact.html">Contact</a><p>Calculations run in your browser. Nothing you type is sent anywhere.</p></div></footer>
+<script src="../assets/calc.js"></script>
+<script>
+(function(){
+  var $ = function(id){return document.getElementById(id);}, out = $('out');
+  var ids = ['w','l','over','fw'];
+  function row(name, p){ return '<tr><td>' + name + '</td><td class="num">' + p.panels + ' × ' + p.cut + ' in</td><td class="num">' + (p.inches/36).toFixed(2) + '</td><td class="num">' + Calc.yardsText(p.yards) + '</td></tr>'; }
+  function run(){
+    var r = Calc.quiltBacking({ w: $('w').value, l: $('l').value, over: $('over').value, fw: $('fw').value });
+    if (!r.ok) { out.innerHTML = '<p class="error">' + r.error + '</p>'; return; }
+    var b = r[r.best];
+    out.innerHTML = '<p class="big">Buy ' + Calc.yardsText(b.yards) + '</p>' +
+      '<p>Backing size: ' + r.bw + ' x ' + r.bl + ' in. ' + (b.panels === 1 ? 'One piece, no seams.' : b.panels + ' panels, ' + (b.panels - 1) + ' seam(s) ' + (r.best === 'vertical' ? 'along the length.' : 'across the quilt.')) + '</p>' +
+      '<table><tr><th>Layout</th><th class="num">Pieces</th><th class="num">Exact yd</th><th class="num">Buy</th></tr>' +
+      row('Seams along the length', r.vertical) + row('Seams across', r.horizontal) + '</table>';
+  }
+  $('calc').onclick = run;
+  var EX = [['60','72','4','40'], ['90','108','4','40'], ['36','52','2','40']];
+  var acts = document.querySelector('.actions');
+  EX.forEach(function(ex, i){
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'ghost'; b.textContent = 'Example ' + (i + 1);
+    b.onclick = function(){ ids.forEach(function(k, j){ $(k).value = ex[j]; }); run(); };
+    acts.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stacked Discount Calculator — "Extra % Off", Coupons and Sales Tax</title>
+<meta name="description" content="Work out the real price when discounts stack: 30% off plus an extra 20% off, a $10 coupon, and sales tax. Shows each step and the true total discount.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="../index.html">Everyday Figures</a><nav><a href="../index.html">All tools</a><a href="../about.html">About</a></nav></div></header>
+<main class="wrap">
+<h1>Stacked Discount Calculator</h1>
+<p class="lead">"30% off, plus an extra 20% off at checkout" is not 50% off. Enter the original price, every percent discount, an optional dollar coupon and your sales tax to see the real price, step by step.</p>
+
+<section class="tool" aria-label="Calculator">
+  <div class="grid g2">
+    <div><label for="price">Original price ($)</label><input id="price" type="number" step="0.01" min="0" inputmode="decimal" value="80"></div>
+    <div><label for="pcts">Percent discounts, in order (comma-separated)</label><input id="pcts" value="30, 20" placeholder="e.g. 30, 20"></div>
+    <div><label for="coupon">Dollar coupon ($, optional)</label><input id="coupon" type="number" step="0.01" min="0" inputmode="decimal" value=""></div>
+    <div><label for="when">Coupon applies</label><select id="when"><option value="after">after the percent discounts</option><option value="before">before the percent discounts</option></select></div>
+    <div><label for="tax">Sales tax (%)</label><input id="tax" type="number" step="0.001" min="0" inputmode="decimal" value="0"></div>
+  </div>
+  <div class="actions"><button type="button" id="calc">Calculate</button></div>
+  <div class="result" id="out" aria-live="polite"></div>
+</section>
+
+<h2>How to use it</h2>
+<ol>
+  <li>Enter the <strong>original (tag) price</strong> before any discount.</li>
+  <li>List the <strong>percent discounts</strong> separated by commas, in the order the store applies them — usually the advertised sale first, then the "extra" checkout discount.</li>
+  <li>If you also have a <strong>dollar-off coupon</strong> ("$10 off"), enter it and choose whether it is taken before or after the percent discounts. The receipt or the coupon's fine print usually tells you; if you are not sure, try both — the tool shows the difference.</li>
+  <li>Enter your <strong>sales tax rate</strong> to see what you will actually pay. Tax is calculated on the discounted price.</li>
+</ol>
+<p class="note">Why stacking is less than the sum: each percent discount is taken from the price that is left after the previous one. 30% then 20% means you pay 0.70 × 0.80 = 0.56 of the price, which is 44% off, not 50%. The order of the percent discounts does not change the result; the position of a dollar coupon does. Tax rules for coupons (especially manufacturer coupons) differ between US states, so treat the tax line as an estimate.</p>
+
+<h2>Worked examples</h2>
+<h3>1. "30% off + extra 20% off" on an $80 jacket</h3>
+<table><tr><th>Step</th><th class="num">Discount</th><th class="num">Price after</th></tr>
+<tr><td>Original</td><td class="num"></td><td class="num">$80.00</td></tr>
+<tr><td>30% off</td><td class="num">−$24.00</td><td class="num">$56.00</td></tr>
+<tr><td>Extra 20% off</td><td class="num">−$11.20</td><td class="num">$44.80</td></tr></table>
+<p>You pay $44.80: a real discount of <strong>44%</strong>. A flat 50% off would have been $40.00.</p>
+
+<h3>2. 25% off a $120 item, a $10 coupon, and 8.25% tax</h3>
+<table><tr><th>Coupon taken</th><th class="num">Before tax</th><th class="num">Tax (8.25%)</th><th class="num">Total</th></tr>
+<tr><td>After the 25% (120 × 0.75 − 10)</td><td class="num">$80.00</td><td class="num">$6.60</td><td class="num">$86.60</td></tr>
+<tr><td>Before the 25% ((120 − 10) × 0.75)</td><td class="num">$82.50</td><td class="num">$6.81</td><td class="num">$89.31</td></tr></table>
+<p>The same coupon is worth the full $10 when it comes last, but only $7.50 when the 25% is taken from it too. That is a $2.50 difference before tax.</p>
+
+<h3>3. Three discounts on a $45 item: 40%, then 15%, then 10%</h3>
+<p>45 × 0.60 × 0.85 × 0.90 = <strong>$20.66</strong> (rounded from $20.655). You save $24.34, a total discount of <strong>54.1%</strong>, while simply adding the numbers would suggest 65%.</p>
+
+<h2>Frequently asked questions</h2>
+<details><summary>Does the order of percent discounts matter?</summary>
+<p>No. Multiplication works in any order, so 20% then 30% gives the same price as 30% then 20%. Only a fixed-dollar coupon changes the result depending on when it is applied.</p></details>
+<details><summary>How do I turn stacked discounts into one percentage?</summary>
+<p>Convert each discount to the share you still pay (30% off → 0.70), multiply the shares together, and subtract the result from 1. For 30% and 20%: 1 − 0.70 × 0.80 = 0.44, so 44% off. The calculator shows this as "real discount".</p></details>
+<details><summary>Is sales tax charged on the original price or the sale price?</summary>
+<p>For ordinary store discounts, tax is normally charged on the reduced price, which is what this tool assumes. Manufacturer coupons are treated differently in some states, so for those the tax line may be slightly off. Check your state's rule or your receipt if the exact cents matter.</p></details>
+</main>
+<footer class="site"><div class="wrap"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../contact.html">Contact</a><p>Calculations run in your browser. Nothing you type is sent anywhere.</p></div></footer>
+<script src="../assets/calc.js"></script>
+<script>
+(function(){
+  var $ = function(id){return document.getElementById(id);}, out = $('out');
+  function run(){
+    var r = Calc.stackedDiscount({
+      price: $('price').value,
+      percents: $('pcts').value.split(/[,\s]+/).filter(Boolean),
+      couponAmount: $('coupon').value, couponWhen: $('when').value, taxRate: $('tax').value
+    });
+    if (!r.ok) { out.innerHTML = '<p class="error">' + r.error + '</p>'; return; }
+    var rows = '<tr><td>Original</td><td class="num"></td><td class="num">' + Calc.money(Number($('price').value)) + '</td></tr>' +
+      r.steps.map(function(s){return '<tr><td>' + s.label + '</td><td class="num">−' + Calc.money(s.amount) + '</td><td class="num">' + Calc.money(s.after) + '</td></tr>';}).join('');
+    if (r.tax > 0) rows += '<tr><td>Sales tax</td><td class="num">+' + Calc.money(r.tax) + '</td><td class="num">' + Calc.money(r.total) + '</td></tr>';
+    out.innerHTML = '<p class="big">You pay ' + Calc.money(r.total) + '</p>' +
+      '<p>You save ' + Calc.money(r.saved) + ' — a real discount of <strong>' + r.effectivePct.toFixed(1) + '%</strong>' +
+      (r.steps.length > 1 && !(Number($('coupon').value) > 0) && Math.abs(r.naivePct - r.effectivePct) > 0.05 ? ' (adding the percentages would suggest ' + r.naivePct.toFixed(0) + '%).' : '.') + '</p>' +
+      '<table><tr><th>Step</th><th class="num">Change</th><th class="num">Price after</th></tr>' + rows + '</table>';
+  }
+  $('calc').onclick = run;
+  var EX = [['80','30, 20','','after','0'], ['120','25','10','after','8.25'], ['120','25','10','before','8.25'], ['45','40, 15, 10','','after','0']];
+  var names = ['Example 1', 'Example 2 (coupon after)', 'Example 2 (coupon before)', 'Example 3'];
+  var acts = document.querySelector('.actions');
+  EX.forEach(function(ex, i){
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'ghost'; b.textContent = names[i];
+    b.onclick = function(){ ['price','pcts','coupon','when','tax'].forEach(function(k, j){ $(k).value = ex[j]; }); run(); };
+    acts.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>

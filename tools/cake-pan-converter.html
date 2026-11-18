@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cake Pan Size Converter — Round, Square and 9x13 Batter Multiplier</title>
+<meta name="description" content="Convert a cake recipe between round, square and rectangular pans. Get the batter multiplier, how much thinner or thicker the cake will be, and common pans of similar size.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="../index.html">Everyday Figures</a><nav><a href="../index.html">All tools</a><a href="../about.html">About</a></nav></div></header>
+<main class="wrap">
+<h1>Cake Pan Size Converter</h1>
+<p class="lead">Your recipe says 9x13 but you only have round pans? Enter the pan the recipe was written for and the pan you want to use. You get the batter multiplier and a list of common pans with almost the same area.</p>
+
+<section class="tool" aria-label="Calculator">
+  <div id="pans"></div>
+  <div class="actions"><button type="button" id="calc">Convert</button></div>
+  <div class="result" id="out" aria-live="polite"></div>
+</section>
+
+<h2>How to use it</h2>
+<ol>
+  <li><strong>Recipe pan:</strong> choose the shape the recipe calls for and its size in inches. For a round pan, enter the diameter (straight across). For rectangles, enter both sides.</li>
+  <li><strong>Number of pans:</strong> layer cakes are often baked in two or three pans — enter how many.</li>
+  <li><strong>Your pan:</strong> the same for the pan(s) you plan to use.</li>
+  <li>Press <strong>Convert</strong>. Multiply every ingredient by the batter multiplier to keep the same cake thickness. If you keep the recipe as it is, the result tells you how much thinner or thicker the cake will be.</li>
+</ol>
+<p class="note">How it works: batter is compared by the area of the pan bottom (π × radius² for round pans, length × width for square and rectangular ones), assuming both pans have the same depth and straight sides. Measure the inside of the pan at the top edge. Sloped sides, tube pans and Bundt pans are not covered.</p>
+
+<h2>Worked examples</h2>
+<h3>1. A 9x13 recipe in two 9-inch rounds</h3>
+<p>9 × 13 = 117 sq in. Two 9-inch rounds = 2 × π × 4.5² ≈ 127.2 sq in. The multiplier is <strong>1.09</strong>. Most bakers simply keep the recipe as written: the layers come out about 8% thinner, so start checking for doneness a few minutes early.</p>
+
+<h3>2. An 8-inch square recipe in a 9-inch round</h3>
+<p>8 × 8 = 64 sq in, and a 9-inch round is π × 4.5² ≈ 63.6 sq in. The multiplier is <strong>0.99</strong> — practically the same pan. No changes needed.</p>
+
+<h3>3. Making an 8-inch round recipe fit a 10-inch round</h3>
+<p>π × 4² ≈ 50.3 sq in versus π × 5² ≈ 78.5 sq in. The multiplier is <strong>1.56</strong> ((10 ÷ 8)² = 1.5625). Making 1½ times the recipe gets you close; the bigger pan's center takes longer to set, so watch the bake rather than the clock.</p>
+
+<table><caption class="note" style="caption-side:bottom;text-align:left">Areas of common pans (inside dimensions)</caption>
+<tr><th>Pan</th><th class="num">Area (sq in)</th></tr>
+<tr><td>6-inch round</td><td class="num">28.3</td></tr>
+<tr><td>8-inch round</td><td class="num">50.3</td></tr>
+<tr><td>9-inch round</td><td class="num">63.6</td></tr>
+<tr><td>10-inch round</td><td class="num">78.5</td></tr>
+<tr><td>8-inch square</td><td class="num">64</td></tr>
+<tr><td>9-inch square</td><td class="num">81</td></tr>
+<tr><td>11 x 7 rectangle</td><td class="num">77</td></tr>
+<tr><td>13 x 9 rectangle</td><td class="num">117</td></tr></table>
+
+<h2>Frequently asked questions</h2>
+<details><summary>Do I need to change the baking time?</summary>
+<p>Often, a little. If the batter ends up shallower (multiplier above 1 without scaling the recipe), it usually bakes faster. If it is deeper, it takes longer and may need a slightly lower temperature so the edges do not overbake. There is no exact formula; use the recipe's doneness test (a toothpick in the center comes out clean or with a few moist crumbs) and start checking early.</p></details>
+<details><summary>Why is a round pan "smaller" than a square pan of the same size?</summary>
+<p>A round pan is a circle that fits inside the square, so it misses the four corners. Its area is π ÷ 4 ≈ 78.5% of the square's. That is why an 8-inch square matches a 9-inch round, not an 8-inch round.</p></details>
+<details><summary>How do I scale ingredients like eggs when the multiplier is 1.56?</summary>
+<p>Round to something practical. For 1.56 × 2 eggs = 3.1, use 3 eggs. For flour and sugar, weigh if you can. Small rounding is fine; aim to keep the ratio of the main ingredients close to the original.</p></details>
+</main>
+<footer class="site"><div class="wrap"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../contact.html">Contact</a><p>Calculations run in your browser. Nothing you type is sent anywhere.</p></div></footer>
+<script src="../assets/calc.js"></script>
+<script>
+(function(){
+  var box = document.getElementById('pans'), out = document.getElementById('out');
+  function block(id, title, v){
+    return '<fieldset style="border:0;padding:0;margin:0 0 10px"><legend style="font-weight:600;margin-bottom:4px">' + title + '</legend><div class="grid g4">' +
+      '<div><label>Shape</label><select id="' + id + 's"><option value="round"' + (v.s==='round'?' selected':'') + '>Round</option><option value="square"' + (v.s==='square'?' selected':'') + '>Square</option><option value="rect"' + (v.s==='rect'?' selected':'') + '>Rectangle</option></select></div>' +
+      '<div><label id="' + id + 'al">Size (in)</label><input id="' + id + 'a" type="number" step="0.25" min="0" inputmode="decimal" value="' + v.a + '"></div>' +
+      '<div><label>Width (in)</label><input id="' + id + 'b" type="number" step="0.25" min="0" inputmode="decimal" value="' + (v.b||'') + '"></div>' +
+      '<div><label>Number of pans</label><input id="' + id + 'n" type="number" step="1" min="1" inputmode="numeric" value="' + v.n + '"></div></div></fieldset>';
+  }
+  box.innerHTML = block('f', 'Recipe pan', {s:'rect', a:13, b:9, n:1}) + block('t', 'Your pan', {s:'round', a:9, n:2});
+  function sync(id){
+    var s = document.getElementById(id+'s').value, b = document.getElementById(id+'b');
+    b.disabled = s !== 'rect'; b.parentNode.style.opacity = s === 'rect' ? 1 : .45;
+    document.getElementById(id+'al').textContent = s === 'round' ? 'Diameter (in)' : s === 'square' ? 'Side (in)' : 'Length (in)';
+  }
+  ['f','t'].forEach(function(id){ sync(id); document.getElementById(id+'s').onchange = function(){ sync(id); }; });
+  var EX = [[['rect',13,9,1],['round',9,'',2]], [['square',8,'',1],['round',9,'',1]], [['round',8,'',1],['round',10,'',1]]];
+  var acts = document.querySelector('.actions');
+  EX.forEach(function(ex, i){
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'ghost'; b.textContent = 'Example ' + (i + 1);
+    b.onclick = function(){
+      ['f','t'].forEach(function(id, j){ var v = ex[j]; ['s','a','b','n'].forEach(function(k, x){ document.getElementById(id+k).value = v[x]; }); sync(id); });
+      document.getElementById('calc').onclick();
+    };
+    acts.appendChild(b);
+  });
+  function pan(id){ var g = function(k){return document.getElementById(id+k).value;}; return {shape:g('s'), a:g('a'), b:g('b'), count:g('n')}; }
+  document.getElementById('calc').onclick = function(){
+    var r = Calc.panConvert(pan('f'), pan('t'));
+    if (!r.ok) { out.innerHTML = '<p class="error">' + r.error + '</p>'; return; }
+    var m = r.multiplier, change = (1 / m - 1) * 100;
+    var keep = Math.abs(change) < 1 ? 'the cake will be about the same thickness.' :
+      'the cake will be about ' + Math.abs(change).toFixed(0) + '% ' + (change < 0 ? 'thinner' : 'thicker') + '.';
+    var close = r.close.length ? '<p>Common single pans within 12% of the recipe pan’s total area:</p><table><tr><th>Pan</th><th class="num">Area</th><th class="num">Difference</th></tr>' +
+      r.close.map(function(p){return '<tr><td>' + p.name + '</td><td class="num">' + p.area.toFixed(1) + ' sq in</td><td class="num">' + (p.diff >= 0 ? '+' : '') + p.diff.toFixed(1) + '%</td></tr>';}).join('') + '</table>' : '';
+    out.innerHTML = '<p class="big">Batter multiplier: ' + m.toFixed(2) + '</p>' +
+      '<p>Recipe pan(s): ' + r.fromArea.toFixed(1) + ' sq in. Your pan(s): ' + r.toArea.toFixed(1) + ' sq in.</p>' +
+      '<p>Multiply each ingredient by ' + m.toFixed(2) + ' to keep the same thickness. If you keep the recipe unchanged, ' + keep + '</p>' + close;
+  };
+})();
+</script>
+</body>
+</html>

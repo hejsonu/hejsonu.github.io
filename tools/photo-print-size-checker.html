@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Photo Print Size Checker — Will It Crop, and Is the Resolution Enough?</title>
+<meta name="description" content="Enter your photo's pixel size and a print size like 8x10 or 4x6. See how much of the picture gets cropped, the real DPI after cropping, and the largest sharp print you can make.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="../index.html">Everyday Figures</a><nav><a href="../index.html">All tools</a><a href="../about.html">About</a></nav></div></header>
+<main class="wrap">
+<h1>Photo Print Size Checker</h1>
+<p class="lead">Most "pixels to inches" calculators only divide by 300. They skip the part that surprises people at the print counter: an 8x10 print does not have the same shape as a camera or phone photo, so part of the picture is cut off — and the resolution is measured on what is left.</p>
+
+<section class="tool" aria-label="Calculator">
+  <div class="grid g2">
+    <div><label for="w">Image width (pixels)</label><input id="w" type="number" min="1" inputmode="numeric" value="6000"></div>
+    <div><label for="h">Image height (pixels)</label><input id="h" type="number" min="1" inputmode="numeric" value="4000"></div>
+    <div><label for="size">Print size (inches)</label><select id="size">
+      <option value="6x4">4 x 6</option><option value="7x5">5 x 7</option><option value="10x8" selected>8 x 10</option><option value="11x8.5">8.5 x 11</option>
+      <option value="14x11">11 x 14</option><option value="18x12">12 x 18</option><option value="20x16">16 x 20</option><option value="24x18">18 x 24</option>
+      <option value="30x20">20 x 30</option><option value="36x24">24 x 36</option><option value="custom">Custom…</option></select></div>
+    <div><label for="custom">Custom size (e.g. 12x12)</label><input id="custom" placeholder="only used with Custom…"></div>
+  </div>
+  <div class="actions"><button type="button" id="calc">Check print</button></div>
+  <div class="result" id="out" aria-live="polite"></div>
+</section>
+
+<h2>How to use it</h2>
+<ol>
+  <li>Find the photo's size in pixels. On a phone, open the photo's details (the "i" button); on a computer, check the file's properties. A 12-megapixel phone photo is usually 4032 x 3024; a 24-megapixel camera photo is usually 6000 x 4000.</li>
+  <li>Pick the print size. Portrait or landscape does not matter — the tool turns the print to match your photo.</li>
+  <li>Read the result: how much of the image is <strong>cut off</strong> to fill the paper, which sides lose it, and the <strong>DPI</strong> (dots per inch) of the part that is printed.</li>
+</ol>
+<p class="note">Rough guide to DPI: 300 or more looks sharp even up close; 200–299 looks good in a frame at normal distance; 150–199 is usually fine for a large print on a wall; below 150 you may see softness. Print labs use similar guides, but viewing distance matters more than any single number. Upscaling a file adds pixels, not detail.</p>
+
+<h2>Worked examples</h2>
+<h3>1. 24-megapixel camera photo (6000 x 4000) as an 8x10</h3>
+<p>The photo is 3:2 (1.5 times as wide as tall); 8x10 is 5:4 (1.25). To fill the paper, the width is trimmed to 4000 x 1.25 = <strong>5000 pixels</strong>, so 1000 pixels — <strong>16.7% of the picture</strong> — are cut from the sides. What remains prints at 4000 ÷ 8 = <strong>500 DPI</strong>: plenty. Cropping, not resolution, is the thing to plan for here.</p>
+
+<h3>2. 12-megapixel phone photo (4032 x 3024) as a 4x6</h3>
+<p>Phone photos are 4:3 (1.33); a 4x6 is 3:2 (1.5) — longer. This time the <em>top and bottom</em> are trimmed: 4032 ÷ 1.5 = 2688 of the 3024 pixels stay, so <strong>11.1%</strong> is cut off. The print is 672 DPI. Heads close to the top edge of a phone photo are what usually get clipped.</p>
+
+<h3>3. The same phone photo as a 16x20</h3>
+<table><tr><th>Step</th><th class="num">Value</th></tr>
+<tr><td>Shape of print (20 ÷ 16)</td><td class="num">1.25</td></tr>
+<tr><td>Width kept (3024 x 1.25)</td><td class="num">3780 px</td></tr>
+<tr><td>Cut off</td><td class="num">6.25%</td></tr>
+<tr><td>DPI (3024 ÷ 16)</td><td class="num">189</td></tr></table>
+<p>189 DPI is in the "fair" range: fine on a wall seen from a few feet away, a little soft with your nose against it. Without any cropping, this photo prints sharp at 300 DPI up to <strong>13.44 x 10.08 inches</strong>.</p>
+
+<h2>Frequently asked questions</h2>
+<details><summary>Why does my 8x10 print cut off part of my photo?</summary>
+<p>Because the shapes differ. Most cameras make 3:2 photos and most phones make 4:3 photos, but an 8x10 is 5:4 — closer to a square. Filling the paper means trimming the long side. If you want nothing cut, choose a print size with the same shape (4x6, 8x12, 12x18 or 20x30 for 3:2 photos), or ask for a "fit" print with white borders.</p></details>
+<details><summary>Is 300 DPI really required?</summary>
+<p>No. 300 DPI is the safe number for prints you hold in your hand. Larger prints are looked at from further away, so 150–200 DPI is usually acceptable for posters and wall prints. The tool shows the DPI after cropping, which is the number that matters.</p></details>
+<details><summary>Does the DPI setting saved in the file matter?</summary>
+<p>Not for the print size. The "72 DPI" or "300 DPI" tag in a file is just a label; the printer uses the pixels. A 3000 x 2400 file prints the same 10x8 inches at 300 DPI whatever the tag says.</p></details>
+</main>
+<footer class="site"><div class="wrap"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../contact.html">Contact</a><p>Calculations run in your browser. Nothing you type is sent anywhere.</p></div></footer>
+<script src="../assets/calc.js"></script>
+<script>
+(function(){
+  var $ = function(id){return document.getElementById(id);}, out = $('out');
+  function f2(x){ return (Math.round(x*100)/100).toFixed(2); }
+  function run(){
+    var s = $('size').value === 'custom' ? $('custom').value : $('size').value;
+    var m = String(s).toLowerCase().replace(/\s/g,'').match(/^([\d.]+)x([\d.]+)$/);
+    if (!m) { out.innerHTML = '<p class="error">Enter the custom size like 12x12 or 11x17.</p>'; return; }
+    var r = Calc.photoPrint({ w: $('w').value, h: $('h').value, pl: m[1], ps: m[2] });
+    if (!r.ok) { out.innerHTML = '<p class="error">' + r.error + '</p>'; return; }
+    var pl = Math.max(+m[1], +m[2]), ps = Math.min(+m[1], +m[2]);
+    var printName = r.landscape ? pl + ' x ' + ps : ps + ' x ' + pl;
+    var where;
+    if (r.cropSide === 'none') where = 'Nothing is cut off — the photo and the print have the same shape.';
+    else {
+      // trimming the long side cuts left/right on a landscape photo, top/bottom on a portrait one
+      var cutsWidth = (r.cropSide === 'long') ? r.landscape : !r.landscape;
+      var sides = cutsWidth ? 'left and right' : 'top and bottom';
+      where = '<strong>' + r.cropPct.toFixed(1) + '%</strong> of the picture is cut off (from the ' + sides + ') to fill the paper. Kept area: ' +
+        Math.round(r.landscape ? r.keepL : r.keepS) + ' x ' + Math.round(r.landscape ? r.keepS : r.keepL) + ' px.';
+    }
+    var label = { excellent: 'Excellent — sharp even up close', good: 'Good — sharp at normal viewing distance', fair: 'Fair — fine on a wall, soft up close', low: 'Low — likely to look soft' }[r.tier];
+    var mx = r.landscape ? [r.max300[0], r.max300[1]] : [r.max300[1], r.max300[0]];
+    var mx2 = r.landscape ? [r.max150[0], r.max150[1]] : [r.max150[1], r.max150[0]];
+    out.innerHTML = '<p class="big">' + Math.round(r.dpi) + ' DPI on ' + (/^(8|11|18)\b/.test(printName) ? 'an ' : 'a ') + printName + ' print</p><p>' + label + '.</p><p>' + where + '</p>' +
+      '<table><tr><th>Largest print without cropping</th><th class="num">Size (inches)</th></tr>' +
+      '<tr><td>at 300 DPI (close viewing)</td><td class="num">' + f2(mx[0]) + ' x ' + f2(mx[1]) + '</td></tr>' +
+      '<tr><td>at 150 DPI (wall viewing)</td><td class="num">' + f2(mx2[0]) + ' x ' + f2(mx2[1]) + '</td></tr></table>';
+  }
+  $('calc').onclick = run;
+  var EX = [['6000','4000','10x8'], ['4032','3024','6x4'], ['4032','3024','20x16']];
+  var acts = document.querySelector('.actions');
+  EX.forEach(function(ex, i){
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'ghost'; b.textContent = 'Example ' + (i + 1);
+    b.onclick = function(){ $('w').value = ex[0]; $('h').value = ex[1]; $('size').value = ex[2]; run(); };
+    acts.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>

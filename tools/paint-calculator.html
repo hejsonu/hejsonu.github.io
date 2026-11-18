@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paint Calculator — How Much Paint for a Room, and the Cheapest Cans to Buy</title>
+<meta name="description" content="Work out the wall area of a room minus doors and windows, the paint needed for one or two coats, and the cheapest mix of gallons, quarts and 5-gallon buckets.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="../index.html">Everyday Figures</a><nav><a href="../index.html">All tools</a><a href="../about.html">About</a></nav></div></header>
+<main class="wrap">
+<h1>Paint Calculator</h1>
+<p class="lead">Knowing you need "1.9 gallons" is only half the answer — paint is sold in gallons and quarts, and a quart usually costs far more than a quarter of a gallon. This tool works out the paint for your walls and then the cheapest set of cans that covers it.</p>
+
+<section class="tool" aria-label="Calculator">
+  <div class="grid g2">
+    <div><label for="l">Room length (ft)</label><input id="l" type="number" min="0" step="0.5" inputmode="decimal" value="12"></div>
+    <div><label for="w">Room width (ft)</label><input id="w" type="number" min="0" step="0.5" inputmode="decimal" value="12"></div>
+    <div><label for="h">Wall height (ft)</label><input id="h" type="number" min="0" step="0.5" inputmode="decimal" value="8"></div>
+    <div><label for="coats">Coats</label><input id="coats" type="number" min="1" step="1" value="2"></div>
+    <div><label for="doors">Doors (about 21 sq ft each)</label><input id="doors" type="number" min="0" step="1" value="1"></div>
+    <div><label for="wins">Windows (about 15 sq ft each)</label><input id="wins" type="number" min="0" step="1" value="2"></div>
+    <div><label for="cov">Coverage per gallon (sq ft, from the can)</label><input id="cov" type="number" min="1" step="10" value="350"></div>
+    <div><label for="ceil">Ceiling too?</label><select id="ceil"><option value="">No</option><option value="1">Yes, same coverage and coats</option></select></div>
+    <div><label for="pg">Price per gallon ($)</label><input id="pg" type="number" min="0" step="0.01" inputmode="decimal" value="45"></div>
+    <div><label for="pq">Price per quart ($, optional)</label><input id="pq" type="number" min="0" step="0.01" inputmode="decimal" value="20"></div>
+    <div><label for="p5">Price per 5-gallon bucket ($, optional)</label><input id="p5" type="number" min="0" step="0.01" inputmode="decimal" value=""></div>
+  </div>
+  <div class="actions"><button type="button" id="calc">Calculate</button></div>
+  <div class="result" id="out" aria-live="polite"></div>
+</section>
+
+<h2>How to use it</h2>
+<ol>
+  <li>Measure the floor length and width and the wall height in feet.</li>
+  <li>Count the doors and windows. The tool subtracts 21 sq ft per door (3 x 7 ft) and 15 sq ft per window (3 x 5 ft); for very large windows or patio doors, count them as two.</li>
+  <li>Take the <strong>coverage</strong> from the can — most interior paints say 250–400 sq ft per gallon. Use the lower end for rough or porous walls and for strong color changes.</li>
+  <li>Two coats is the norm for a new color. Add the prices you see at the store to get the cheapest combination of cans.</li>
+</ol>
+<p class="note">Coverage on the label assumes a smooth, primed surface. Fresh drywall, bare plaster and dark-to-light changes can need a primer coat or a third coat. The plan below does not include paint for trim or a primer.</p>
+
+<h2>Worked examples</h2>
+<p>Can prices below are illustrative, not quotes from any store.</p>
+<h3>1. A 12 x 12 ft bedroom, 8 ft walls, 1 door, 2 windows, 2 coats</h3>
+<p>Walls: 2 × (12 + 12) × 8 = 384 sq ft, minus 21 for the door and 30 for the windows = <strong>333 sq ft</strong>. Two coats at 350 sq ft per gallon: 666 ÷ 350 = <strong>1.90 gallons</strong>. With gallons at $45 and quarts at $20, two gallons ($90) are cheaper than one gallon plus four quarts ($125).</p>
+
+<h3>2. An 11 x 10 ft room, 1 door, 1 window, coverage 400</h3>
+<table><tr><th>Option</th><th class="num">Paint</th><th class="num">Cost</th></tr>
+<tr><td>2 gallons</td><td class="num">2.00 gal</td><td class="num">$90</td></tr>
+<tr><td>1 gallon + 2 quarts</td><td class="num">1.50 gal</td><td class="num">$85</td></tr></table>
+<p>Walls 336 − 36 = 300 sq ft, two coats = 600 ÷ 400 = exactly <strong>1.5 gallons</strong>. Here the quarts win by $5 and nothing is left over. With quarts at $25 instead, two gallons would be cheaper — which is why the tool checks every combination.</p>
+
+<h3>3. A 20 x 16 ft living room, 9 ft walls, 2 doors, 4 windows, plus the ceiling</h3>
+<p>Walls: 2 × 36 × 9 = 648 − 42 − 60 = 546 sq ft; two coats need 1,092 ÷ 350 = <strong>3.12 gallons</strong>. Cheapest: 3 gallons + 1 quart = $155 (a 5-gallon bucket at $190 or four gallons at $180 cost more). The 320 sq ft ceiling needs another 1.83 gallons for two coats — usually a separate ceiling paint, so buy it as its own set.</p>
+
+<h2>Frequently asked questions</h2>
+<details><summary>How many square feet does a gallon of paint cover?</summary>
+<p>Most interior wall paints list 250–400 sq ft per gallon for one coat. The number on your can is the one to use; textured or unpainted surfaces soak up more.</p></details>
+<details><summary>Should I subtract doors and windows?</summary>
+<p>Yes for normal rooms — it can save a quart or more. But if the result is right on the edge of a can size, round up rather than down: you will want some left for touch-ups.</p></details>
+<details><summary>Is it cheaper to buy quarts or a gallon?</summary>
+<p>Per ounce, gallons are almost always cheaper; a quart is a quarter of the paint but often 40–50% of the gallon price. Quarts only make sense to top up a small shortfall, as in example 2. Enter your store's prices and the tool compares every mix.</p></details>
+</main>
+<footer class="site"><div class="wrap"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../contact.html">Contact</a><p>Calculations run in your browser. Nothing you type is sent anywhere.</p></div></footer>
+<script src="../assets/calc.js"></script>
+<script>
+(function(){
+  var $ = function(id){return document.getElementById(id);}, out = $('out');
+  var ids = ['l','w','h','coats','doors','wins','cov','ceil','pg','pq','p5'];
+  function planText(p){
+    if (!p) return 'Enter a gallon price to see the cheapest cans.';
+    var parts = [];
+    if (p.five) parts.push(p.five + ' × 5-gallon bucket');
+    if (p.gal) parts.push(p.gal + ' × gallon');
+    if (p.qt) parts.push(p.qt + ' × quart');
+    return 'Cheapest: <strong>' + parts.join(' + ') + '</strong> = ' + Calc.money(p.cost) + ' (' + p.vol.toFixed(2) + ' gal of paint)';
+  }
+  function run(){
+    var r = Calc.paintNeed({ l: $('l').value, w: $('w').value, h: $('h').value, doors: $('doors').value, windows: $('wins').value,
+      coats: $('coats').value, coverage: $('cov').value, gal: $('pg').value, qt: $('pq').value, five: $('p5').value, ceiling: !!$('ceil').value });
+    if (!r.ok) { out.innerHTML = '<p class="error">' + r.error + '</p>'; return; }
+    var h = '<p class="big">' + r.need.toFixed(2) + ' gallons for the walls</p>' +
+      '<p>Paintable wall area: ' + r.area.toFixed(0) + ' sq ft × ' + (Number($('coats').value) || 1) + ' coat(s).</p><p>' + planText(r.plan) + '</p>';
+    if ($('ceil').value) h += '<p>Ceiling: ' + r.ceilArea.toFixed(0) + ' sq ft → ' + r.needCeil.toFixed(2) + ' gallons. ' + planText(r.planCeil) + '</p>';
+    out.innerHTML = h;
+  }
+  $('calc').onclick = run;
+  var EX = [['12','12','8','2','1','2','350','','45','20',''], ['11','10','8','2','1','1','400','','45','20',''], ['20','16','9','2','2','4','350','1','45','20','190']];
+  var acts = document.querySelector('.actions');
+  EX.forEach(function(ex, i){
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'ghost'; b.textContent = 'Example ' + (i + 1);
+    b.onclick = function(){ ids.forEach(function(k, j){ $(k).value = ex[j]; }); run(); };
+    acts.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>

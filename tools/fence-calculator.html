@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fence Calculator — Posts, Pickets, Rails and Concrete (With Gates and Corners)</title>
+<meta name="description" content="Count fence posts, pickets, rails and bags of concrete for a fence with several sides and gates. Avoids the classic one-post-short mistake and shows the real post spacing.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="../index.html">Everyday Figures</a><nav><a href="../index.html">All tools</a><a href="../about.html">About</a></nav></div></header>
+<main class="wrap">
+<h1>Fence Calculator: Posts, Pickets, Rails and Concrete</h1>
+<p class="lead">"Length divided by post spacing" gives you one post too few on a straight run — and on a fence with corners and gates the error grows. This tool counts posts side by side, shares the corner posts, adds a post for each gate, then works out pickets, rails and concrete from the same layout.</p>
+
+<section class="tool" aria-label="Calculator">
+  <div class="grid g2">
+    <div><label for="sides">Side lengths (ft), separated by commas</label><input id="sides" type="text" value="100"></div>
+    <div><label for="spacing">Maximum post spacing (ft)</label><input id="spacing" type="number" min="0" step="0.5" inputmode="decimal" value="8"></div>
+    <div><label><input id="closed" type="checkbox"> The fence closes on itself (last side meets the first)</label></div>
+    <div></div>
+    <div><label for="g1w">Gate 1 width (ft, 0 = none)</label><input id="g1w" type="number" min="0" step="0.5" inputmode="decimal" value="0"></div>
+    <div><label for="g1s">Gate 1 is on side number</label><input id="g1s" type="number" min="1" step="1" inputmode="numeric" value="1"></div>
+    <div><label for="g2w">Gate 2 width (ft, 0 = none)</label><input id="g2w" type="number" min="0" step="0.5" inputmode="decimal" value="0"></div>
+    <div><label for="g2s">Gate 2 is on side number</label><input id="g2s" type="number" min="1" step="1" inputmode="numeric" value="1"></div>
+    <div><label for="pw">Picket width (in)</label><input id="pw" type="number" min="0" step="0.25" inputmode="decimal" value="5.5"></div>
+    <div><label for="gap">Gap between pickets (in)</label><input id="gap" type="number" min="0" step="0.25" inputmode="decimal" value="0"></div>
+    <div><label for="spare">Spare pickets (%)</label><input id="spare" type="number" min="0" step="1" inputmode="numeric" value="5"></div>
+    <div><label for="rails">Rails per section</label><input id="rails" type="number" min="0" step="1" inputmode="numeric" value="2"></div>
+    <div><label for="post">Post size</label><select id="post"><option value="3.5">4x4 (3.5 in actual)</option><option value="5.5">6x6 (5.5 in actual)</option></select></div>
+    <div><label for="hole">Hole diameter (in, blank = skip concrete)</label><input id="hole" type="number" min="0" step="0.5" inputmode="decimal" value="10"></div>
+    <div><label for="depth">Hole depth (in)</label><input id="depth" type="number" min="0" step="1" inputmode="numeric" value="30"></div>
+    <div><label for="gravel">Gravel in the bottom of the hole (in)</label><input id="gravel" type="number" min="0" step="1" inputmode="numeric" value="0"></div>
+  </div>
+  <div class="actions"><button type="button" id="calc">Calculate</button></div>
+  <div class="result" id="out" aria-live="polite"></div>
+</section>
+
+<h2>How to use it</h2>
+<ol>
+  <li>Measure each straight side of the fence and type the lengths in order, for example <code>50, 30, 50</code> for a back yard that starts and ends at the house. Tick the box if the fence goes all the way around and the last side meets the first.</li>
+  <li>Set the maximum distance between posts. 8 feet is common because rails are sold in 8-foot lengths; windy sites and heavy panels often use 6 feet. The tool spaces posts evenly on each side, so the real spacing is usually a little less than your maximum.</li>
+  <li>Add up to two gates and the side each one is on. The tool assumes each gate sits at one end of its side, next to a corner or end post. A gate in the middle of a side can need one more post and section.</li>
+  <li>Enter the picket width and the gap. A privacy fence has no gap; a classic picket fence often has a gap of 2 to 3 inches. Pickets and rails for the gates themselves are not included — gates are usually bought or built separately.</li>
+  <li>For concrete, enter the hole size. A common rule of thumb is a hole about three times the post width and about a third of the post's length in the ground, but follow your local code and frost depth.</li>
+</ol>
+
+<h2>Worked examples</h2>
+<h3>1. A straight 100-foot privacy fence</h3>
+<p>100 ÷ 8 = 12.5, so the run needs 13 sections — and 13 sections need <strong>14 posts</strong>, not 13. Spread evenly, the posts end up 7.69 feet apart. With 5½-inch pickets and no gap: 1,200 inches ÷ 5.5 = 218.2, so <strong>219 pickets</strong>, or 230 with 5% spare. Two rails per section: 26 rails. With 10-inch holes 30 inches deep around 4x4 posts, each hole takes 1.151 cubic feet of concrete: 16.11 cubic feet in total, which is <strong>43 bags of 50 lb</strong> or 27 bags of 80 lb.</p>
+
+<h3>2. A back yard: three sides with a gate</h3>
+<p>Sides of 50, 30 and 50 feet start and end at the house, with a 4-foot gate at the end of the 30-foot side. Picket fence: 3½-inch pickets with 2½-inch gaps.</p>
+<table><tr><th>Side</th><th class="num">Fenced length</th><th class="num">Sections</th><th class="num">Pickets</th></tr>
+<tr><td>1</td><td class="num">50 ft</td><td class="num">7</td><td class="num">100</td></tr>
+<tr><td>2 (with gate)</td><td class="num">26 ft</td><td class="num">4</td><td class="num">52</td></tr>
+<tr><td>3</td><td class="num">50 ft</td><td class="num">7</td><td class="num">100</td></tr></table>
+<p>18 sections, plus one post to close the run, plus one for the gate: <strong>20 posts</strong>. The shortcut 130 ÷ 8 rounded up gives 17 — three posts short. <strong>252 pickets</strong> (265 with 5% spare) and 36 rails.</p>
+
+<h3>3. A closed 40 x 40-foot dog run with 6-foot spacing</h3>
+<p>Four 40-foot sides with a 3-foot gate on side 1, posts no more than 6 feet apart, three rails per section. Each side needs 7 sections (side 1 has 37 feet of fence, still 7), so 28 sections. A closed fence shares every corner, so posts = sections + gates = <strong>29 posts</strong> (the shortcut 160 ÷ 6 gives 27). That is 84 rails. With 8-inch holes 24 inches deep around 4x4 posts, each hole takes 0.528 cubic feet: 15.31 cubic feet, or <strong>41 bags of 50 lb</strong> (26 bags of 80 lb).</p>
+
+<h2>Frequently asked questions</h2>
+<details><summary>Why is the post count always one more than the number of sections?</summary>
+<p>Every section needs a post at both ends, and neighbouring sections share one. So a straight run of n sections has n + 1 posts. On a fence that closes on itself, the last section ends at the first post, so posts and sections are equal. Each gate adds one post, because the opening needs a post on both sides.</p></details>
+<details><summary>How much concrete does one bag make?</summary>
+<p>The tool uses yields commonly printed on bags of concrete mix: about 0.375 cubic feet for a 50 lb bag and 0.6 cubic feet for an 80 lb bag. Check the label on the product you buy, and buy one or two extra bags — holes are rarely perfectly round.</p></details>
+<details><summary>Do I need gravel in the bottom of the post hole?</summary>
+<p>Many builders put a few inches of gravel under the post for drainage. If you do, enter its depth and the tool counts concrete only for the part of the hole above it. Follow the instructions on the concrete bag and your local building rules.</p></details>
+</main>
+<footer class="site"><div class="wrap"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../contact.html">Contact</a><p>Calculations run in your browser. Nothing you type is sent anywhere.</p></div></footer>
+<script src="../assets/calc.js"></script>
+<script>
+(function(){
+  var $ = function(id){return document.getElementById(id);}, out = $('out');
+  var ids = ['sides','spacing','closed','g1w','g1s','g2w','g2s','pw','gap','spare','rails','post','hole','depth','gravel'];
+  function n2(v){ return (Math.round(v * 100) / 100).toFixed(2); }
+  function run(){
+    var r = Calc.fence({ sides: $('sides').value, closed: $('closed').checked, spacing: $('spacing').value,
+      gates: [{ w: $('g1w').value, side: $('g1s').value }, { w: $('g2w').value, side: $('g2s').value }],
+      pw: $('pw').value, gap: $('gap').value, spare: $('spare').value, rails: $('rails').value,
+      post: $('post').value, hole: $('hole').value, depth: $('depth').value, gravel: $('gravel').value });
+    if (!r.ok) { out.innerHTML = '<p class="error">' + r.error + '</p>'; return; }
+    var rows = r.per.map(function(p, i){ return '<tr><td>' + (i + 1) + '</td><td class="num">' + p.len + ' ft</td><td class="num">' + p.sections + '</td><td class="num">' + n2(p.actual) + ' ft</td><td class="num">' + p.pickets + '</td></tr>'; }).join('');
+    var html = '<p class="big">' + r.posts + ' posts</p>' +
+      '<p>' + r.sections + ' sections' + (r.gates ? ', ' + r.gates + ' gate(s)' : '') + '. The shortcut "total length ÷ spacing" gives ' + r.naive + (r.naive < r.posts ? ' — ' + (r.posts - r.naive) + ' too few.' : '.') + '</p>' +
+      '<table><tr><th>Side</th><th class="num">Fenced</th><th class="num">Sections</th><th class="num">Real spacing</th><th class="num">Pickets</th></tr>' + rows + '</table>' +
+      '<p>Pickets: ' + r.pickets + ' (buy ' + r.picketsBuy + ' with spare). Rails: ' + r.rails + '.</p>';
+    if (r.concrete) html += '<p>Concrete: ' + (Math.round(r.concrete.each * 1000) / 1000).toFixed(3) + ' cu ft per hole, ' + n2(r.concrete.total) + ' cu ft in total = ' + r.concrete.bags50 + ' bags of 50 lb or ' + r.concrete.bags80 + ' bags of 80 lb.</p>';
+    out.innerHTML = html;
+  }
+  $('calc').onclick = run;
+  var EX = [['100','8',false,'0','1','0','1','5.5','0','5','2','3.5','10','30','0'],
+            ['50, 30, 50','8',false,'4','2','0','1','3.5','2.5','5','2','3.5','10','30','0'],
+            ['40, 40, 40, 40','6',true,'3','1','0','1','5.5','0','5','3','3.5','8','24','0']];
+  var acts = document.querySelector('.actions');
+  EX.forEach(function(ex, i){
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'ghost'; b.textContent = 'Example ' + (i + 1);
+    b.onclick = function(){ ids.forEach(function(k, j){ if (k === 'closed') $(k).checked = ex[j]; else $(k).value = ex[j]; }); run(); };
+    acts.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>

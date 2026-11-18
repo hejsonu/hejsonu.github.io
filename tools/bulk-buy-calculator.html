@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Is the Bulk Size Worth It? Bulk Buy Calculator With Waste</title>
+<meta name="description" content="A lower unit price only saves money if you use the product before it goes off. Compare a regular and a bulk pack, count what you would throw away, and see how much you must use to break even.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="../index.html">Everyday Figures</a><nav><a href="../index.html">All tools</a><a href="../about.html">About</a></nav></div></header>
+<main class="wrap">
+<h1>Is the Bulk Size Worth It?</h1>
+<p class="lead">The shelf label says the big pack is cheaper per ounce. That is only true for the part you actually use. Enter both packs, how fast you use the product and how long it keeps once opened, and see the real cost — plus the least you would have to use for the bulk pack to pay off.</p>
+
+<section class="tool" aria-label="Calculator">
+  <div class="grid g2">
+    <div><label for="rp">Regular pack price ($)</label><input id="rp" type="number" step="0.01" min="0" inputmode="decimal" value="9.99"></div>
+    <div><label for="rs">Regular pack size</label><input id="rs" type="number" step="any" min="0" inputmode="decimal" value="12"></div>
+    <div><label for="bp">Bulk pack price ($)</label><input id="bp" type="number" step="0.01" min="0" inputmode="decimal" value="24.99"></div>
+    <div><label for="bs">Bulk pack size</label><input id="bs" type="number" step="any" min="0" inputmode="decimal" value="40"></div>
+    <div><label for="use">How much you use per week</label><input id="use" type="number" step="any" min="0" inputmode="decimal" value="8"></div>
+    <div><label for="life">Keeps for (weeks after opening, blank = doesn't spoil)</label><input id="life" type="number" step="any" min="0" inputmode="decimal" value="4"></div>
+  </div>
+  <p class="note">Use the same unit for every size (all ounces, all pounds, all rolls…). Example 1's numbers are filled in.</p>
+  <div class="actions"><button type="button" id="calc">Compare</button></div>
+  <div class="result" id="out" aria-live="polite"></div>
+</section>
+
+<h2>How to use it</h2>
+<ol>
+  <li>Enter the price and size of the <strong>regular</strong> pack you would normally buy, and of the <strong>bulk</strong> pack.</li>
+  <li>Estimate how much you use in a typical week, in the same unit.</li>
+  <li>Enter how many weeks the product stays good once opened (check the label — "use within 2 weeks of opening"). Leave it blank for things that do not go off, like paper towels or detergent.</li>
+  <li>The tool assumes you finish a regular pack before it spoils, and that anything left in the bulk pack after the "keeps for" period is thrown away.</li>
+</ol>
+
+<h2>Worked examples</h2>
+<p>Prices below are illustrative, not quotes from any store.</p>
+<h3>1. Ground coffee: 12 oz for $9.99 or 40 oz for $24.99</h3>
+<p>On the shelf: $0.833 per ounce vs $0.625 — the bulk bag looks 25% cheaper. But if you drink 8 oz a week and the opened bag stays fresh for 4 weeks, you use 32 oz and 8 oz go stale. The real cost is $24.99 ÷ 32 = <strong>$0.781 per ounce you drink</strong>: still 6.2% cheaper than the small bag, but far from 25%. To break even you need to use at least 30 oz (75% of the bag).</p>
+
+<h3>2. Baby spinach: 5 oz for $3.49 or 16 oz for $5.99</h3>
+<table><tr><th></th><th class="num">Per oz on the label</th><th class="num">Per oz you eat</th></tr>
+<tr><td>5 oz bag</td><td class="num">$0.698</td><td class="num">$0.698</td></tr>
+<tr><td>16 oz tub (4 oz/week, keeps 1 week)</td><td class="num">$0.374</td><td class="num">$1.498</td></tr></table>
+<p>Eating 4 oz before the tub turns, you pay <strong>114.5% more</strong> per ounce than with the small bag. The tub only pays off if you eat at least 8.6 oz of it (54%) while it is good.</p>
+
+<h3>3. Paper towels: 6 rolls for $8.99 or 12 rolls for $15.49</h3>
+<p>Nothing spoils, so the label price is the real price: $1.291 per roll vs $1.498, <strong>13.8% cheaper</strong>. Compared with buying two 6-packs ($17.98) you save $2.49. Here the only question is whether you have the storage space.</p>
+
+<h2>Frequently asked questions</h2>
+<details><summary>How is the break-even amount worked out?</summary>
+<p>Divide the bulk price by the regular price per unit. That is how much product the same money would buy in regular packs. For the coffee: $24.99 ÷ $0.8325 = 30.0 oz. If you use less than that before the rest goes bad, the regular size would have been cheaper.</p></details>
+<details><summary>What about the money tied up in a big purchase?</summary>
+<p>For everyday groceries it is small — a few dollars a month at most — so this tool leaves it out. Storage space and the chance of a cheaper sale on the regular size are usually bigger factors.</p></details>
+<details><summary>Can I freeze part of the bulk pack instead?</summary>
+<p>Yes, and that changes the answer. If you freeze portions, use the frozen shelf life in the "keeps for" box, or leave it blank if you will use everything.</p></details>
+</main>
+<footer class="site"><div class="wrap"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../contact.html">Contact</a><p>Calculations run in your browser. Nothing you type is sent anywhere.</p></div></footer>
+<script src="../assets/calc.js"></script>
+<script>
+(function(){
+  var $ = function(id){return document.getElementById(id);}, out = $('out');
+  var ids = ['rp','rs','bp','bs','use','life'];
+  function m3(x){ return '$' + (Math.round((x + 1e-9)*1000)/1000).toFixed(3); } // half-up: 1.4975 → 1.498
+  function g(x){ return String(Math.round(x*10)/10); }
+  function run(){
+    var r = Calc.bulkBuy({ rp: $('rp').value, rs: $('rs').value, bp: $('bp').value, bs: $('bs').value, use: $('use').value, life: $('life').value });
+    if (!r.ok) { out.innerHTML = '<p class="error">' + r.error + '</p>'; return; }
+    var cheaper = r.diffPct < 0;
+    var h = '<p class="big">' + (cheaper ? 'Bulk wins: ' + Math.abs(r.diffPct).toFixed(1) + '% cheaper' : 'Regular wins: bulk costs ' + r.diffPct.toFixed(1) + '% more') + '</p>' +
+      '<table><tr><th></th><th class="num">Label price per unit</th><th class="num">Price per unit you use</th></tr>' +
+      '<tr><td>Regular pack</td><td class="num">' + m3(r.ru) + '</td><td class="num">' + m3(r.ru) + '</td></tr>' +
+      '<tr><td>Bulk pack</td><td class="num">' + m3(r.bu) + '</td><td class="num">' + m3(r.eff) + '</td></tr></table>';
+    if (r.hasLife) h += '<p>You would use ' + g(r.used) + ' of ' + g(Number($('bs').value)) + ' before it spoils' + (r.waste > 1e-9 ? ' and throw away <strong>' + g(r.waste) + '</strong>.' : ' — no waste.') + '</p>';
+    else if (r.weeks) h += '<p>At your rate the bulk pack lasts about ' + g(r.weeks) + ' weeks.</p>';
+    h += '<p>Break-even: you must use at least <strong>' + g(r.mustUse) + '</strong> (' + r.mustUsePct.toFixed(0) + '% of the bulk pack) for it to beat the regular size.</p>';
+    out.innerHTML = h;
+  }
+  $('calc').onclick = run;
+  var EX = [['9.99','12','24.99','40','8','4'], ['3.49','5','5.99','16','4','1'], ['8.99','6','15.49','12','','']];
+  var acts = document.querySelector('.actions');
+  EX.forEach(function(ex, i){
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'ghost'; b.textContent = 'Example ' + (i + 1);
+    b.onclick = function(){ ids.forEach(function(k, j){ $(k).value = ex[j]; }); run(); };
+    acts.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>

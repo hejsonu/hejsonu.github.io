@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unit Price Comparison Calculator (Mixed oz, lb, g, mL, Multipacks)</title>
+<meta name="description" content="Compare up to 6 products by price per ounce, pound, 100 g, fluid ounce or liter — even when the packages use different units or come in multipacks.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="../index.html">Everyday Figures</a><nav><a href="../index.html">All tools</a><a href="../about.html">About</a></nav></div></header>
+<main class="wrap">
+<h1>Unit Price Comparison Calculator</h1>
+<p class="lead">Which package is really cheaper? Enter up to six products — one in ounces, another in pounds, a third in grams, a 12-pack of cans — and see them ranked by price per unit.</p>
+
+<section class="tool" aria-label="Calculator">
+  <div id="items"></div>
+  <div class="actions">
+    <button type="button" id="calc">Compare</button>
+    <button type="button" class="ghost" id="add">+ Add item</button>
+    <button type="button" class="ghost" id="reset">Reset</button>
+  </div>
+  <div class="result" id="out" aria-live="polite"></div>
+</section>
+
+<h2>How to use it</h2>
+<ol>
+  <li><strong>Price:</strong> the shelf price you would pay for one package (after any sale price, before tax).</li>
+  <li><strong>Size and unit:</strong> the amount printed on the package, e.g. <em>16 oz</em>, <em>2 lb</em>, <em>1 kg</em>, <em>67.6 fl oz</em> or <em>2 L</em>. Pick "count" for things sold by the piece (eggs, rolls, pods).</li>
+  <li><strong>Packs:</strong> for multipacks, enter the size of one unit and the number of units (a 12-pack of 12 fl oz cans = size 12, unit fl oz, packs 12). Leave it at 1 otherwise.</li>
+  <li>Press <strong>Compare</strong>. The cheapest item is listed first; every other item shows how much more you pay per unit, in percent.</li>
+</ol>
+<p class="note">Weight (oz, lb, g, kg) can only be compared with weight, and volume (fl oz, pint, quart, gallon, mL, L) only with volume. "oz" here is the weight ounce; liquids labeled "fl oz" are volume. US customary units are used (1 fl oz = 29.5735 mL, 1 oz = 28.3495 g).</p>
+
+<h2>Worked examples</h2>
+<h3>1. Small jar or big jar of peanut butter</h3>
+<p>16 oz for $3.49 versus 40 oz for $7.99.</p>
+<table><tr><th>Item</th><th class="num">Price per oz</th><th class="num">vs. cheapest</th></tr>
+<tr><td>40 oz jar</td><td class="num">$0.200</td><td class="num">cheapest</td></tr>
+<tr><td>16 oz jar</td><td class="num">$0.218</td><td class="num">+9.2%</td></tr></table>
+<p>The big jar wins, but only by about 9% — worth it only if you will finish it before it goes stale.</p>
+
+<h3>2. Coffee sold in three different units</h3>
+<p>A 12 oz bag for $9.99, a 2 lb bag for $24.99, and a 1 kg bag for $29.99.</p>
+<table><tr><th>Item</th><th class="num">Price per oz</th><th class="num">Price per lb</th><th class="num">vs. cheapest</th></tr>
+<tr><td>2 lb bag</td><td class="num">$0.781</td><td class="num">$12.50</td><td class="num">cheapest</td></tr>
+<tr><td>12 oz bag</td><td class="num">$0.833</td><td class="num">$13.32</td><td class="num">+6.6%</td></tr>
+<tr><td>1 kg bag</td><td class="num">$0.850</td><td class="num">$13.60</td><td class="num">+8.9%</td></tr></table>
+<p>The 1 kg bag looks like the "bulk" option, but 1 kg is only about 35.3 oz, and per ounce it is the most expensive of the three.</p>
+
+<h3>3. Cans, bottles or a 2-liter</h3>
+<p>A 12-pack of 12 fl oz cans for $5.49, an 8-pack of 16.9 fl oz bottles for $4.99, and one 2 L bottle for $1.99.</p>
+<table><tr><th>Item</th><th class="num">Price per fl oz</th><th class="num">Price per liter</th><th class="num">vs. cheapest</th></tr>
+<tr><td>2 L bottle</td><td class="num">$0.0294</td><td class="num">$0.995</td><td class="num">cheapest</td></tr>
+<tr><td>8 × 16.9 fl oz</td><td class="num">$0.0369</td><td class="num">$1.25</td><td class="num">+25.4%</td></tr>
+<tr><td>12 × 12 fl oz</td><td class="num">$0.0381</td><td class="num">$1.29</td><td class="num">+29.6%</td></tr></table>
+<p>You pay roughly a quarter more for single-serve packaging. Whether that is worth it (no flat leftovers, easy to carry) is your call — the calculator just shows the price of the convenience.</p>
+
+<h2>Frequently asked questions</h2>
+<details><summary>Why not just read the unit price on the shelf tag?</summary>
+<p>Shelf tags are a good start, but stores do not always use the same unit for neighboring products — one tag may say "per oz" and the next "per lb" or "per count". Tags also usually ignore a sale or a coupon you plan to use. Enter the price you will actually pay and every item is put on the same unit.</p></details>
+<details><summary>Can I compare ounces with fluid ounces?</summary>
+<p>No. An ounce (oz) measures weight and a fluid ounce (fl oz) measures volume. They only match for water-like liquids, so the calculator refuses to mix them rather than give a misleading answer. Compare products that are labeled the same way.</p></details>
+<details><summary>Is the bigger package always cheaper per unit?</summary>
+<p>No. Example 2 above shows a larger bag that costs more per ounce. Sales on small sizes, store brands and odd metric sizes regularly break the "bigger is cheaper" rule, which is exactly why it is worth doing the math.</p></details>
+</main>
+<footer class="site"><div class="wrap"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../contact.html">Contact</a><p>Calculations run in your browser. Nothing you type is sent anywhere.</p></div></footer>
+<script src="../assets/calc.js"></script>
+<script>
+(function(){
+  var unitOpts = [['oz','oz (weight)'],['lb','lb'],['g','g'],['kg','kg'],['floz','fl oz'],['pt','pint'],['qt','quart'],['gal','gallon'],['ml','mL'],['l','L'],['ct','count']];
+  var box = document.getElementById('items'), out = document.getElementById('out');
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function addRow(v){
+    v = v || {};
+    var n = box.children.length + 1; if (n > 6) return;
+    var d = document.createElement('div'); d.className = 'grid g4' + (n > 1 ? ' row' : '');
+    d.innerHTML = '<div style="grid-column:1/-1"><label>Item ' + n + ' name (optional)</label><input data-k="name" value="' + esc(v.name||'') + '" placeholder="e.g. Store brand 16 oz"></div>' +
+      '<div><label>Price ($)</label><input data-k="price" type="number" step="0.01" min="0" inputmode="decimal" value="' + (v.price||'') + '"></div>' +
+      '<div><label>Size</label><input data-k="qty" type="number" step="any" min="0" inputmode="decimal" value="' + (v.qty||'') + '"></div>' +
+      '<div><label>Unit</label><select data-k="unit">' + unitOpts.map(function(o){return '<option value="'+o[0]+'"'+(v.unit===o[0]?' selected':'')+'>'+o[1]+'</option>';}).join('') + '</select></div>' +
+      '<div><label>Packs</label><input data-k="packs" type="number" step="1" min="1" inputmode="numeric" value="' + (v.packs||1) + '"></div>';
+    box.appendChild(d);
+  }
+  function read(){
+    return Array.prototype.map.call(box.children, function(r){
+      var o = {}; r.querySelectorAll('[data-k]').forEach(function(el){o[el.getAttribute('data-k')] = el.value;}); return o;
+    }).filter(function(o){return o.price !== '' || o.qty !== '';});
+  }
+  function digits(v){return v < 0.1 ? 4 : v < 1 ? 3 : 2;}
+  document.getElementById('calc').onclick = function(){
+    var r = Calc.unitPrice(read());
+    if (!r.ok) { out.innerHTML = '<p class="error">' + esc(r.error) + '</p>'; return; }
+    var head = r.rows[0].prices.map(function(p){return '<th class="num">Price ' + p.label + '</th>';}).join('');
+    var body = r.rows.map(function(row){
+      return '<tr><td>' + esc(row.name) + '</td>' + row.prices.map(function(p){return '<td class="num">' + Calc.money(p.value, digits(p.value)) + '</td>';}).join('') +
+        '<td class="num">' + (row.rank === 1 ? 'cheapest' : '+' + row.pctMore.toFixed(1) + '%') + '</td></tr>';
+    }).join('');
+    out.innerHTML = '<p class="big">' + esc(r.rows[0].name) + ' is the best value.</p>' +
+      '<table><tr><th>Item</th>' + head + '<th class="num">vs. cheapest</th></tr>' + body + '</table>';
+  };
+  document.getElementById('add').onclick = function(){ addRow(); };
+  document.getElementById('reset').onclick = function(){ box.innerHTML = ''; out.innerHTML = ''; addRow({unit:'oz'}); addRow({unit:'oz'}); };
+  var EX = [
+    [{name:'16 oz jar', price:'3.49', qty:'16', unit:'oz'}, {name:'40 oz jar', price:'7.99', qty:'40', unit:'oz'}],
+    [{name:'12 oz bag', price:'9.99', qty:'12', unit:'oz'}, {name:'2 lb bag', price:'24.99', qty:'2', unit:'lb'}, {name:'1 kg bag', price:'29.99', qty:'1', unit:'kg'}],
+    [{name:'12 x 12 fl oz cans', price:'5.49', qty:'12', unit:'floz', packs:12}, {name:'8 x 16.9 fl oz bottles', price:'4.99', qty:'16.9', unit:'floz', packs:8}, {name:'2 L bottle', price:'1.99', qty:'2', unit:'l'}]
+  ];
+  var acts = document.querySelector('.actions');
+  EX.forEach(function(ex, i){
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'ghost'; b.textContent = 'Example ' + (i + 1);
+    b.onclick = function(){ box.innerHTML = ''; ex.forEach(addRow); document.getElementById('calc').onclick(); };
+    acts.appendChild(b);
+  });
+  EX[0].forEach(addRow);
+})();
+</script>
+</body>
+</html>

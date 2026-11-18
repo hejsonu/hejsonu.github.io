@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plant Spacing Calculator — How Many Plants Actually Fit in a Bed (Square vs Triangular)</title>
+<meta name="description" content="Count how many plants fit in a rectangular garden bed at a given spacing, with a gap at the edges. Compares square and triangular (staggered) layouts and draws the plan.">
+<link rel="stylesheet" href="../assets/style.css">
+<style>.plan{width:100%;height:auto;background:#f3efe4;border:1px solid #cdbf9c;border-radius:6px;margin-top:8px}</style>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="../index.html">Everyday Figures</a><nav><a href="../index.html">All tools</a><a href="../about.html">About</a></nav></div></header>
+<main class="wrap">
+<h1>Plant Spacing Calculator</h1>
+<p class="lead">How many plants will really fit in your bed? Most spacing calculators divide the area by the spacing, which ignores the edges. This one places every plant, keeps a gap from the border, compares a square grid with a staggered (triangular) layout, and draws the plan.</p>
+
+<section class="tool" aria-label="Calculator">
+  <div class="grid g3">
+    <div><label for="units">Units</label><select id="units"><option value="imp">Feet + inches</option><option value="met">Meters + cm</option></select></div>
+    <div><label for="len" id="lenL">Bed length (ft)</label><input id="len" type="number" step="0.1" min="0" inputmode="decimal" value="8"></div>
+    <div><label for="wid" id="widL">Bed width (ft)</label><input id="wid" type="number" step="0.1" min="0" inputmode="decimal" value="4"></div>
+    <div><label for="sp" id="spL">Spacing between plants (in)</label><input id="sp" type="number" step="0.5" min="0" inputmode="decimal" value="12"></div>
+    <div><label for="mg" id="mgL">Gap from edge (in, blank = half the spacing)</label><input id="mg" type="number" step="0.5" min="0" inputmode="decimal" value=""></div>
+  </div>
+  <div class="actions"><button type="button" id="calc">Calculate</button></div>
+  <div class="result" id="out" aria-live="polite"></div>
+</section>
+
+<h2>How to use it</h2>
+<ol>
+  <li>Enter the <strong>inside length and width</strong> of the bed (for a raised bed, measure inside the boards).</li>
+  <li>Enter the <strong>spacing</strong> from the plant tag or seed packet — the distance from one plant's center to the next.</li>
+  <li>The <strong>gap from the edge</strong> defaults to half the spacing, so plants on the border get roughly the same room as the ones inside. Set it to 0 if plants may sit right at the edge, or larger next to a path.</li>
+  <li>Press <strong>Calculate</strong>. You get the count for a square grid and for the best staggered layout (rows tried in both directions), the area-only estimate for comparison, and a drawing of the layout that fits more plants.</li>
+</ol>
+<p class="note">Square grid: plants in straight rows and columns, all neighbors at the spacing distance. Staggered (triangular): every other row is shifted by half a spacing and rows sit closer (0.866 × spacing apart), so each plant is still exactly one spacing from its six neighbors. In an open field this fits about 15% more plants — but in a small bed the shifted rows lose a plant at the edge, and the gain can disappear.</p>
+
+<h2>Worked examples</h2>
+<h3>1. 4 × 8 ft raised bed, 12-inch spacing</h3>
+<p>With a 6-inch edge gap, the plant centers fit in a 3 × 7 ft area. A square grid gives 4 rows of 8 = <strong>32 plants</strong>. The best staggered layout (rows across the bed) also gives <strong>32</strong>. The area-only formula would promise 32 square / 37 staggered — the 5 "extra" staggered plants do not actually fit.</p>
+
+<h3>2. 10 × 20 ft ground-cover bed, 12-inch spacing</h3>
+<p>Square grid: 10 rows of 20 = <strong>200 plants</strong>. Staggered with rows along the 20 ft side: 11 rows alternating 20 and 19 plants = <strong>215 plants</strong>, 7.5% more. (Rows the other way give 209.) The area-only formula says 231, so buying plants by that number would leave you with 16 spare.</p>
+
+<h3>3. 3 × 6 ft bed, 18-inch spacing</h3>
+<p>With a 9-inch edge gap: square grid 2 rows of 4 = <strong>8 plants</strong>; best staggered layout only <strong>7</strong> (rows of 4 and 3). Here the simple square grid is the better choice.</p>
+
+<h2>Frequently asked questions</h2>
+<details><summary>Is triangular (staggered) spacing always better?</summary>
+<p>No. It packs more plants per square foot in large areas, which is why it is popular for ground covers and hedges. In a narrow or small bed the shifted rows often lose one plant each, as examples 1 and 3 show. Use the drawing to decide; a square grid is also easier to weed between and to stake.</p></details>
+<details><summary>Why use half the spacing as the edge gap?</summary>
+<p>A plant spaced 12 inches from its neighbors spreads roughly 6 inches in every direction. Keeping it 6 inches from the border means it fills out to the edge without hanging over a path or a board. If your plants can spill over the edge, use a smaller gap.</p></details>
+<details><summary>What spacing should I use?</summary>
+<p>Follow the plant tag or seed packet; it reflects the mature width of that variety. If you see a range (for example 12–18 inches), the lower number fills in faster and the higher number gives more air flow. This calculator does not recommend spacings for particular plants, because they vary a lot by variety and climate.</p></details>
+</main>
+<footer class="site"><div class="wrap"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../contact.html">Contact</a><p>Calculations run in your browser. Nothing you type is sent anywhere.</p></div></footer>
+<script src="../assets/calc.js"></script>
+<script>
+(function(){
+  var $ = function(id){return document.getElementById(id);}, out = $('out');
+  function labels(){
+    var met = $('units').value === 'met', b = met ? 'm' : 'ft', s = met ? 'cm' : 'in';
+    $('lenL').textContent = 'Bed length (' + b + ')'; $('widL').textContent = 'Bed width (' + b + ')';
+    $('spL').textContent = 'Spacing between plants (' + s + ')'; $('mgL').textContent = 'Gap from edge (' + s + ', blank = half the spacing)';
+  }
+  $('units').onchange = labels;
+  function draw(L, W, m, pts, s){
+    if (pts.length > 2500) return '<p class="note">Too many plants to draw (' + pts.length + ').</p>';
+    var r = Math.max(s * 0.18, Math.min(L, W) * 0.004);
+    var dots = pts.map(function(p){ return '<circle cx="' + (m + p[0]).toFixed(2) + '" cy="' + (m + p[1]).toFixed(2) + '" r="' + r.toFixed(2) + '" fill="#2f7d4f"/>'; }).join('');
+    return '<svg class="plan" viewBox="0 0 ' + L + ' ' + W + '" role="img" aria-label="Plan of the bed with ' + pts.length + ' plants">' +
+      '<rect x="' + m + '" y="' + m + '" width="' + Math.max(L - 2*m, 0) + '" height="' + Math.max(W - 2*m, 0) + '" fill="none" stroke="#cdbf9c" stroke-dasharray="' + (s/4) + '" stroke-width="' + (s/30) + '"/>' + dots + '</svg>';
+  }
+  function run(){
+    var met = $('units').value === 'met', f = met ? 100 : 12;
+    var L = Number($('len').value) * f, W = Number($('wid').value) * f, s = $('sp').value, m = $('mg').value;
+    var r = Calc.plantSpacing({length: L, width: W, spacing: s, margin: m});
+    if (!r.ok) { out.innerHTML = '<p class="error">' + r.error + '</p>'; return; }
+    var best = r.tri.count > r.square.count ? 'tri' : 'square';
+    var unit = met ? 'cm' : 'in';
+    out.innerHTML = '<p class="big">' + Math.max(r.tri.count, r.square.count) + ' plants fit (' + (best === 'tri' ? 'staggered layout' : 'square grid') + ')</p>' +
+      '<table><tr><th>Layout</th><th class="num">Plants that fit</th></tr>' +
+      '<tr><td>Square grid</td><td class="num">' + r.square.count + '</td></tr>' +
+      '<tr><td>Staggered, rows along the ' + r.tri.along + '</td><td class="num">' + r.tri.count + '</td></tr>' +
+      '<tr><td>Staggered, rows the other way</td><td class="num">' + r.tri.other + '</td></tr>' +
+      '<tr><td class="note">Area-only estimate (square / staggered)</td><td class="num note">' + Math.round(r.ruleSquare) + ' / ' + Math.round(r.ruleTri) + '</td></tr></table>' +
+      '<p class="note">Edge gap used: ' + (+r.margin.toFixed(2)) + ' ' + unit + '. The drawing shows the ' + (best === 'tri' ? 'staggered' : 'square') + ' layout; the dashed line is the edge gap.</p>' +
+      draw(L, W, r.margin, best === 'tri' ? r.tri.pts : r.square.pts, Number(s));
+  }
+  $('calc').onclick = run;
+  var EX = [['imp',8,4,12,''], ['imp',20,10,12,''], ['imp',6,3,18,'']];
+  var acts = document.querySelector('.actions');
+  EX.forEach(function(ex, i){
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'ghost'; b.textContent = 'Example ' + (i + 1);
+    b.onclick = function(){ ['units','len','wid','sp','mg'].forEach(function(k, j){ $(k).value = ex[j]; }); labels(); run(); };
+    acts.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>

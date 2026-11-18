@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Potting Soil Calculator — Tapered Pots, Window Boxes and Bags to Buy</title>
+<meta name="description" content="How much potting mix fills your pot? Handles tapered pots correctly, leaves room at the top, and converts to dry quarts, liters and cubic feet with the number of bags to buy.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="../index.html">Everyday Figures</a><nav><a href="../index.html">All tools</a><a href="../about.html">About</a></nav></div></header>
+<main class="wrap">
+<h1>Potting Soil Calculator</h1>
+<p class="lead">Most pots are narrower at the bottom than at the top. Treating them as straight cylinders — what many soil calculators do — can overestimate by a third or more. This tool measures tapered pots properly, leaves a watering gap at the top, and tells you how many bags to buy.</p>
+
+<section class="tool" aria-label="Calculator">
+  <div class="grid g2">
+    <div><label for="shape">Pot shape</label><select id="shape">
+      <option value="round">Round, straight sides</option><option value="taper">Round, tapered (narrower at the bottom)</option><option value="rect">Rectangular (window box, trough)</option></select></div>
+    <div><label for="count">Number of pots</label><input id="count" type="number" min="1" step="1" value="1"></div>
+    <div class="r"><label for="d">Diameter across the top (in)</label><input id="d" type="number" min="0" step="0.25" inputmode="decimal" value="12"></div>
+    <div class="t"><label for="db">Diameter across the bottom (in)</label><input id="db" type="number" min="0" step="0.25" inputmode="decimal" value=""></div>
+    <div class="x"><label for="l">Length (in)</label><input id="l" type="number" min="0" step="0.25" inputmode="decimal" value=""></div>
+    <div class="x"><label for="wd">Width (in)</label><input id="wd" type="number" min="0" step="0.25" inputmode="decimal" value=""></div>
+    <div><label for="depth">Inside depth (in)</label><input id="depth" type="number" min="0" step="0.25" inputmode="decimal" value="10"></div>
+    <div><label for="head">Gap left at the top (in)</label><input id="head" type="number" min="0" step="0.25" inputmode="decimal" value="1"></div>
+    <div><label for="extra">Extra for settling (%)</label><input id="extra" type="number" min="0" step="1" value="10"></div>
+  </div>
+  <div class="actions"><button type="button" id="calc">Calculate</button></div>
+  <div class="result" id="out" aria-live="polite"></div>
+</section>
+
+<h2>How to use it</h2>
+<ol>
+  <li>Choose the shape. If the pot is wider at the rim than at the base, pick <strong>tapered</strong> and measure both diameters on the inside.</li>
+  <li>Measure the <strong>inside depth</strong> from the base to the rim, and set how much space to leave at the top for watering (1 inch is typical for medium pots, ½ inch for small ones).</li>
+  <li>The extra percentage covers settling: loose potting mix sinks once it is watered and firmed. 10% is a reasonable starting point.</li>
+  <li>The result shows the soil per pot and in total, in <strong>dry quarts</strong> (the unit printed on most US potting-mix bags), liters and cubic feet, and the bags needed for common sizes.</li>
+</ol>
+<p class="note">Bags are usually labelled in dry quarts or cubic feet. A dry quart (67.2 cubic inches) is larger than a liquid quart (57.75 cubic inches); 1 cubic foot is about 25.7 dry quarts. Mixing the two up is a common source of wrong answers.</p>
+
+<h2>Worked examples</h2>
+<h3>1. A 12-inch round pot, 10 inches deep</h3>
+<p>Leaving 1 inch at the top, the soil is 9 inches deep: π × 6² × 9 = 1,017.9 cubic inches = <strong>15.1 dry quarts</strong> (16.7 liters, 0.59 cu ft). With 10% extra that is 16.7 dry quarts — so <strong>three 8-quart bags</strong>, or two 16-quart bags if you can find them.</p>
+
+<h3>2. A tapered pot: 14 inches across the top, 10 across the bottom, 12 deep</h3>
+<table><tr><th>Method</th><th class="num">Dry quarts</th></tr>
+<tr><td>Treated as a 14-inch cylinder, filled 11 inches</td><td class="num">25.2</td></tr>
+<tr><td>Actual tapered shape, filled 11 inches</td><td class="num">18.1</td></tr></table>
+<p>At the 11-inch fill line the pot is 13.67 inches across, and the bottom is only 10. The real volume uses the tapered-cylinder (frustum) formula: π × h ÷ 12 × (D² + D·d + d²). The straight-cylinder shortcut overestimates by <strong>38.9%</strong> — buying four 8-quart bags instead of the three you need.</p>
+
+<h3>3. Three window boxes, 30 x 8 inches, 8 inches deep</h3>
+<p>Filled to 7 inches: 30 × 8 × 7 = 1,680 cubic inches each, 5,040 for all three = <strong>75.0 dry quarts</strong> or 2.92 cu ft. With 10% extra, 3.21 cu ft: <strong>two 2-cu-ft bags</strong> or three 1.5-cu-ft bags.</p>
+
+<h2>Frequently asked questions</h2>
+<details><summary>How many quarts are in a cubic foot of potting soil?</summary>
+<p>About 25.7 dry quarts (1,728 cubic inches ÷ 67.2). You will sometimes see 29.9 — that figure uses liquid quarts, which bags of soil do not use.</p></details>
+<details><summary>Is a "1-gallon" nursery pot really one gallon?</summary>
+<p>Often not. Nursery pot numbers (#1, #2, #5) are trade sizes, and many "1-gallon" pots hold noticeably less than a liquid gallon. Measure the pot and use the tapered option for a real figure.</p></details>
+<details><summary>Should I fill the bottom with gravel to save soil?</summary>
+<p>Gardening extension services generally advise against it: a gravel layer raises the wet zone in the pot rather than improving drainage. Use potting mix all the way down and make sure the pot has drainage holes.</p></details>
+</main>
+<footer class="site"><div class="wrap"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../contact.html">Contact</a><p>Calculations run in your browser. Nothing you type is sent anywhere.</p></div></footer>
+<script src="../assets/calc.js"></script>
+<script>
+(function(){
+  var $ = function(id){return document.getElementById(id);}, out = $('out');
+  function n1(x){ return (Math.round(x*10)/10).toFixed(1); }
+  function n2(x){ return (Math.round(x*100)/100).toFixed(2); }
+  function showFields(){
+    var s = $('shape').value;
+    document.querySelectorAll('.r').forEach(function(e){ e.style.display = s === 'rect' ? 'none' : ''; });
+    document.querySelectorAll('.t').forEach(function(e){ e.style.display = s === 'taper' ? '' : 'none'; });
+    document.querySelectorAll('.x').forEach(function(e){ e.style.display = s === 'rect' ? '' : 'none'; });
+  }
+  function run(){
+    var r = Calc.pottingSoil({ shape: $('shape').value, d: $('d').value, dBottom: $('db').value, l: $('l').value, w: $('wd').value,
+      depth: $('depth').value, headroom: $('head').value, count: $('count').value, extraPct: $('extra').value });
+    if (!r.ok) { out.innerHTML = '<p class="error">' + r.error + '</p>'; return; }
+    var n = Number($('count').value) || 1;
+    var h = '<p class="big">' + n1(r.buy.dryqt) + ' dry quarts to buy</p>' +
+      '<table><tr><th></th><th class="num">Dry qt</th><th class="num">Liters</th><th class="num">Cu ft</th></tr>' +
+      '<tr><td>Soil per pot (filled ' + r.fillDepth + ' in)</td><td class="num">' + n1(r.each.dryqt) + '</td><td class="num">' + n1(r.each.l) + '</td><td class="num">' + n2(r.each.cuft) + '</td></tr>' +
+      (n > 1 ? '<tr><td>All ' + n + ' pots</td><td class="num">' + n1(r.total.dryqt) + '</td><td class="num">' + n1(r.total.l) + '</td><td class="num">' + n2(r.total.cuft) + '</td></tr>' : '') +
+      '<tr><td>With ' + (Number($('extra').value) || 0) + '% extra</td><td class="num">' + n1(r.buy.dryqt) + '</td><td class="num">' + n1(r.buy.l) + '</td><td class="num">' + n2(r.buy.cuft) + '</td></tr></table>' +
+      '<p>Bags: ' + r.bags.map(function(b){ return b.n + ' × ' + b.label; }).join(' · or ') + '</p>';
+    if (r.naive) h += '<p>At the fill line the pot is ' + n2(r.topAtFill) + ' in across. Treating it as a straight cylinder would give ' + n1(r.naive.each.dryqt) + ' dry quarts per pot — ' + n1(r.naive.overPct) + '% too much.</p>';
+    out.innerHTML = h;
+  }
+  $('shape').onchange = showFields; $('calc').onclick = run;
+  var EX = [{shape:'round',d:'12',db:'',l:'',wd:'',depth:'10',head:'1',count:'1',extra:'10'},
+            {shape:'taper',d:'14',db:'10',l:'',wd:'',depth:'12',head:'1',count:'1',extra:'10'},
+            {shape:'rect',d:'',db:'',l:'30',wd:'8',depth:'8',head:'1',count:'3',extra:'10'}];
+  var acts = document.querySelector('.actions');
+  EX.forEach(function(ex, i){
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'ghost'; b.textContent = 'Example ' + (i + 1);
+    b.onclick = function(){ Object.keys(ex).forEach(function(k){ $(k).value = ex[k]; }); showFields(); run(); };
+    acts.appendChild(b);
+  });
+  showFields();
+})();
+</script>
+</body>
+</html>
